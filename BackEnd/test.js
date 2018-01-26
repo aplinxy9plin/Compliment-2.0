@@ -1,5 +1,4 @@
-// request Request
-function sendMessage(user_id,access_token,message){
+function getName(user_id){
     (function(callback) {
         'use strict';
             
@@ -8,9 +7,9 @@ function sendMessage(user_id,access_token,message){
         const httpOptions = {
             hostname: 'api.vk.com',
             port: '443',
-            path: '/method/messages.send?user_id='+user_id+'&access_token='+access_token+'&v=5.63&message='+message+'',
+            path: '/method/users.get?user_id='+user_id+'',
             method: 'POST',
-            headers: {}
+            headers: {"Cookie":"remixlang=0"}
         };
         httpOptions.headers['User-Agent'] = 'node ' + process.version;
      
@@ -44,10 +43,8 @@ function sendMessage(user_id,access_token,message){
         
 
     })((error, statusCode, headers, body) => {
-        /*console.log('ERROR:', error); 
-        console.log('STATUS:', statusCode);
-        console.log('HEADERS:', JSON.stringify(headers));*/
-        console.log('BODY:', body);
-    });
+        var test = JSON.parse(body)
+        console.log(test['response'][0]['first_name']+' '+test['response'][0]['last_name'])
+    });   
 }
-//51ceeef1b81030cee8b94fbd3eded6a0b355de1d49763dd1ce34643546159cac4e0761c7fdb446a67ba07
+getName('133087344')
