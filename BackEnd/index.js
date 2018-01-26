@@ -85,6 +85,17 @@ app.get('/questboy', (req,res) =>{
 	res.send(answer)
 })
 
+app.get('/girl_id', (req,res) =>{
+	var user_id = req.query.user_id
+	var girl_id = req.query.girl_id
+	var sql = "UPDATE boys SET girl_id = "+girl_id+" WHERE user_id = "+user_id+"";
+        con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log('Girl added')
+    })
+    res.send('Girl added')
+})
+
 function sendMessage(user_id,access_token,message){
     (function(callback) {
         'use strict';
