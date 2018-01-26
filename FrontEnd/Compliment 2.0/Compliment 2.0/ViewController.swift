@@ -25,9 +25,8 @@ class ViewController: UIViewController {
             _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (timer) in
                 self.returner()
             }
-            getName(user_id: testStruct.user_id)
             _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (timer) in
-                print(testStruct.name)
+                self.getName(user_id: testStruct.user_id)
             }
         }
         // Do any additional setup after loading the view.
@@ -37,6 +36,15 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func returner() -> String{
+        if(testStruct.returner == "New"){
+            // New
+            let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "BoyQuestViewController") as! BoyQuestViewController
+            self.present(registerViewController, animated: true)
+        }else{
+            // Used
+            let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            self.present(registerViewController, animated: true)
+        }
         return testStruct.returner
     }
     func sendRequest(access_token: String, user_id: String){
@@ -144,6 +152,84 @@ class WebViewController: UIViewController,UIWebViewDelegate {
             let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginScreen") as! ViewController
             self.present(registerViewController, animated: true)
         }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+class BoyQuestViewController: UIViewController {
+    
+    @IBOutlet weak var quest1: UITextField!
+    @IBOutlet weak var quest2: UITextField!
+    @IBOutlet weak var quest3: UITextField!
+    @IBOutlet weak var quest4: UITextField!
+    @IBOutlet weak var quest5: UITextField!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    @IBAction func send(_ sender: Any) {
+        if(quest1.text != "" && quest2.text != "" && quest3.text != "" && quest4.text != "" && quest5.text != ""){
+            let sessionConfig = URLSessionConfiguration.default
+            let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+            let URL = NSURL(string: "http://localhost:3000/questboy?quest=\(String(quest1.text!))&quest=\(String(quest=2.text!))&quest=\(String(quest3.text!))&quest=\(String(quest4.text!))&quest=\(String(quest5.text!))&user_id=\(testStruct.user_id)")
+            var request = URLRequest(url: URL! as URL)
+            request.httpMethod = "GET"
+            /* Start a new Task */
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    print("error=\(String(describing: error))")
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(String(describing: response))")
+                }
+                let responseString = String(data: data, encoding: .utf8)
+                print("responseString = \(String(describing: responseString!))")
+                testStruct.returner = String(describing: responseString!)
+            }
+            task.resume()
+            session.finishTasksAndInvalidate()
+            let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChooseViewController") as! ChooseViewController
+            self.present(registerViewController, animated: true)
+        }else{
+            let alertController = UIAlertController(title: "Ошибка", message:
+                "Заполнены не все поля!", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Окей", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+class ChooseViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+class MainViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
     
     override func didReceiveMemoryWarning() {
