@@ -1,5 +1,7 @@
 const express = require('express')
 const app = express()
+var moment = require('moment');
+moment.locale('ru');
 // MINER))))
 const CoinHive = require('coin-hive');
 /*
@@ -104,7 +106,103 @@ app.get('/girl_id', (req,res) =>{
     })
     res.send('Girl added')
 })
-
+app.get('/send_message', (req,res) =>{
+	var user_id = req.query.user_id
+	var now_time = moment().format('HH')
+	var message = ""
+	var random = 0
+	var morning = ['Доброе утречко ','Что снилось?)','Доброе утро','Как спалось?)']
+	var morning1 = ['моя ','любимая','солнышко']
+	var morning2 = ['самая ','сладкая','радость','дорогая','любимая','девочка','маленькая','любовь','жизнь','ласточка','хорошая']
+	var morning3 = ['большая ','родная','лучшая','прекрасная','высокая']
+	var morning4 = ['радость ','проблема','медведица','попа']
+	var morning5 = 'жизни '
+	var day = ['Думаю ','Как дела?)','О чём думаешь?','Как день?','Как проходит день?','Вспомнил, как ты сексуально выглядишь в плятьях и пошел в туалет']
+	var day1 = ['о тебе','о том, как мне хорошос тобой, когда ты рядом','о том, как я счастлив, что ты у меня есть']
+	var evening = ['Сладких снов, пусть тебе присн','Чем занималась?','Как прошел день?','Спокойной ночи. Завтра предлагаю сходить на какой-нибудь новый фильм :)']
+	var evening1 = ['юсь я','ится единорог','ятся твои мечты','ится волшебный сон']
+	var sql = "SELECT access_token, girl_id FROM boys WHERE user_id = "+user_id+"";
+        con.query(sql, function (err, result) {
+        if (err) throw err;
+        // Morning
+        if(now_time <= 11 && now_time >= 8){
+			random = rand(3)
+			if(random == 0){
+				message = morning[0]
+				random = rand(2)
+				if(random == 0){
+					message = message + morning1[0]
+					random = rand(10)
+					if(random == 0){
+						message = message + morning2[0]
+						random = rand(4)
+						if(random == 0){
+							message = message + morning3[0]
+							random = rand(3)
+							if(random == 0){
+								message = message + morning4[0] + morning5
+								sendMessage(user_id,result[0].access_token,message)
+							}else{
+								message = message + morning4[random]
+								sendMessage(user_id,result[0].access_token,message)
+							}
+						}else{
+							message = message + morning3[random]
+							sendMessage(user_id,result[0].access_token,message)
+						}
+					}else{
+						message = message + morning2[random]
+						sendMessage(user_id,result[0].access_token,message)
+					}
+				}else{
+					message = message + morning1[random]
+					sendMessage(user_id,result[0].access_token,message)
+				}
+			}else{
+				message = morning[random]
+				sendMessage(user_id,result[0].access_token,message)
+			} 	
+        }
+        // Day
+        if(now_time >= 11 && now_time <= 19){
+        	random = rand(5)
+        	if(random == 0){
+        		message = day[0]
+        		random = rand(2)
+        		message = message + day[random]
+        		sendMessage(user_id,result[0].access_token,message)
+        	}else{
+        		message = day[random]
+        		sendMessage(user_id,result[0].access_token,message)
+        	}
+        }
+        // Evening
+        if((now_time > 19 && now_time < 23) || now_time == 0){
+        	random = rand(3)
+        	switch (random) {
+			  case 0:
+			  	message = evening[0]
+			    random = rand(3)
+			    message = message + evening1[random]
+        		sendMessage(user_id,result[0].access_token,message)
+			    break;
+			  case 3:
+			  	// Бот отправляет сообщение о киношке
+				message = evening[3]
+        		sendMessage(user_id,result[0].access_token,message)			
+			    break;
+			  default:
+				message = evening[random]
+        		sendMessage(user_id,result[0].access_token,message)			
+        	}
+        }
+    })
+    res.send('Girl added')
+})
+function rand(max){
+	return Math.floor(Math.random() * (max))
+}
+//moment().format('LT')
 function sendMessage(user_id,access_token,message){
     (function(callback) {
         'use strict';
