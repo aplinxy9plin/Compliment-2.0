@@ -106,6 +106,10 @@ app.get('/girl_id', (req,res) =>{
     })
     res.send('Girl added')
 })
+app.get('/vk_bot', (req,res) =>{
+	var user_id = req.query.user_id
+	sendMessageBot(user_id,'66b58e42989cca5adea9a2a149012548e2ef2c6dc5778393e0dfb7a778d96733dfdb748d92228c363977d','test')
+})
 app.get('/send_message', (req,res) =>{
 	var user_id = req.query.user_id
 	compliment_chooser(user_id)
@@ -130,7 +134,7 @@ function compliment_chooser(user_id){
         if (err) throw err;
        	user_id = result[0].girl_id
         // Morning
-        if(now_time < 11 && now_time >= 8){
+        if(now_time < 11 && now_time >= 0){
 			random = rand(3)
 			if(random == 0){
 				message = morning[0]
@@ -253,9 +257,54 @@ function sendMessage(user_id,access_token,message){
         var sql = "SELECT user_id FROM boys WHERE access_token = '"+access_token+"'";
 	        con.query(sql, function (err, result) {
 	        if (err) throw err;
-	        var random_time = Math.floor(Math.random() * (120000 - 40000)) + 40000 // милисекунд
+	        var random_time = 3000//Math.floor(Math.random() * (120000 - 40000)) + 40000 // милисекунд
 	        setTimeout(compliment_chooser, random_time, result[0].user_id)
 	    })
+    });
+}
+function sendMessageBot(user_id,access_token,message){
+    (function(callback) {
+        'use strict';
+            
+        const httpTransport = require('https');
+        const responseEncoding = 'utf8';
+        const httpOptions = {
+            hostname: 'api.vk.com',
+            port: '443',
+            path: '/method/messages.send?user_id='+user_id+'&access_token='+access_token+'&v=5.63&message='+encodeURIComponent(message)+'',
+            method: 'GET',
+            headers: {}
+        };
+        httpOptions.headers['User-Agent'] = 'node ' + process.version;
+        const request = httpTransport.request(httpOptions, (res) => {
+            let responseBufs = [];
+            let responseStr = '';
+            
+            res.on('data', (chunk) => {
+                if (Buffer.isBuffer(chunk)) {
+                    responseBufs.push(chunk);
+                }
+                else {
+                    responseStr = responseStr + chunk;            
+                }
+            }).on('end', () => {
+                responseStr = responseBufs.length > 0 ? 
+                    Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
+                
+                callback(null, res.statusCode, res.headers, responseStr);
+            });
+            
+        })
+        .setTimeout(0)
+        .on('error', (error) => {
+            callback(error);
+        });
+        request.write("")
+        request.end();
+        
+
+    })((error, statusCode, headers, body) => {
+        console.log('Message Sended by BOT')
     });
 }
 function getName(user_id){

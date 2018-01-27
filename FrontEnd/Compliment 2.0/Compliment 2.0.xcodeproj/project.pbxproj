@@ -9,12 +9,31 @@
 /* Begin PBXBuildFile section */
 		5735E248201BC427002D0851 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735E247201BC427002D0851 /* AppDelegate.swift */; };
 		5735E24A201BC427002D0851 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735E249201BC427002D0851 /* ViewController.swift */; };
-		5735E24D201BC427002D0851 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5735E24B201BC427002D0851 /* Main.storyboard */; };
 		5735E24F201BC427002D0851 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5735E24E201BC427002D0851 /* Assets.xcassets */; };
 		5735E252201BC427002D0851 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5735E250201BC427002D0851 /* LaunchScreen.storyboard */; };
 		5735E25D201BC427002D0851 /* Compliment_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735E25C201BC427002D0851 /* Compliment_2_0Tests.swift */; };
 		5735E268201BC427002D0851 /* Compliment_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735E267201BC427002D0851 /* Compliment_2_0UITests.swift */; };
-		5735E28F201BC991002D0851 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5735E282201BC8AC002D0851 /* Alamofire.framework */; };
+		5735E295201C9246002D0851 /* NavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735E294201C9246002D0851 /* NavViewController.swift */; };
+		5735E297201C9EAC002D0851 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E296201C9EAC002D0851 /* next.png */; };
+		5735E299201CA0A4002D0851 /* input.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E298201CA0A3002D0851 /* input.png */; };
+		5735E29B201CB123002D0851 /* VKEnter.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E29A201CB122002D0851 /* VKEnter.png */; };
+		5735E2A1201CB1A1002D0851 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5735E29F201CB1A1002D0851 /* Main.storyboard */; };
+		5735E2B6201CB72C002D0851 /* Слой 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2AD201CB72A002D0851 /* Слой 10.png */; };
+		5735E2B7201CB72C002D0851 /* Елизавета Орлова.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2AE201CB72B002D0851 /* Елизавета Орлова.png */; };
+		5735E2B8201CB72C002D0851 /* Анастасия Курдачева.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2AF201CB72B002D0851 /* Анастасия Курдачева.png */; };
+		5735E2B9201CB72C002D0851 /* Мария Рафикова.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2B0201CB72B002D0851 /* Мария Рафикова.png */; };
+		5735E2BA201CB72C002D0851 /* Анна Фатеева.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2B1201CB72B002D0851 /* Анна Фатеева.png */; };
+		5735E2BB201CB72C002D0851 /* Слой 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2B2201CB72B002D0851 /* Слой 12.png */; };
+		5735E2BC201CB72C002D0851 /* Арина Бучарская.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2B3201CB72C002D0851 /* Арина Бучарская.png */; };
+		5735E2BD201CB72C002D0851 /* Ангелина Акименко.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2B4201CB72C002D0851 /* Ангелина Акименко.png */; };
+		5735E2BE201CB72C002D0851 /* Слой 14.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2B5201CB72C002D0851 /* Слой 14.png */; };
+		5735E2C1201CC066002D0851 /* body.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2BF201CC065002D0851 /* body.png */; };
+		5735E2C2201CC066002D0851 /* boobs.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2C0201CC065002D0851 /* boobs.png */; };
+		5735E2C4201CFB97002D0851 /* addgirl.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2C3201CFB97002D0851 /* addgirl.png */; };
+		5735E2C7201D01B1002D0851 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2C5201D01B0002D0851 /* plus.png */; };
+		5735E2C8201D01B1002D0851 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2C6201D01B0002D0851 /* delete.png */; };
+		5735E2CA201D080F002D0851 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5735E2C9201D080F002D0851 /* Logo.png */; };
+		5735E2CC201D109A002D0851 /* NavSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735E2CB201D109A002D0851 /* NavSecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,62 +51,12 @@
 			remoteGlobalIDString = 5735E243201BC427002D0851;
 			remoteInfo = "Compliment 2.0";
 		};
-		5735E281201BC8AC002D0851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
-		5735E283201BC8AC002D0851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS Tests";
-		};
-		5735E285201BC8AC002D0851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
-			remoteInfo = "Alamofire macOS";
-		};
-		5735E287201BC8AC002D0851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
-			remoteInfo = "Alamofire macOS Tests";
-		};
-		5735E289201BC8AC002D0851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS";
-		};
-		5735E28B201BC8AC002D0851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS Tests";
-		};
-		5735E28D201BC8AC002D0851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E4202FE01B667AA100C997FB;
-			remoteInfo = "Alamofire watchOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5735E244201BC427002D0851 /* Compliment 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Compliment 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5735E247201BC427002D0851 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5735E249201BC427002D0851 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5735E24C201BC427002D0851 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5735E24E201BC427002D0851 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5735E251201BC427002D0851 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5735E253201BC427002D0851 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,7 +66,27 @@
 		5735E263201BC427002D0851 /* Compliment 2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Compliment 2.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5735E267201BC427002D0851 /* Compliment_2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compliment_2_0UITests.swift; sourceTree = "<group>"; };
 		5735E269201BC427002D0851 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		5735E294201C9246002D0851 /* NavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavViewController.swift; sourceTree = "<group>"; };
+		5735E296201C9EAC002D0851 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
+		5735E298201CA0A3002D0851 /* input.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = input.png; sourceTree = "<group>"; };
+		5735E29A201CB122002D0851 /* VKEnter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = VKEnter.png; path = "../../../All Assets/Ready/Contents/VKEnter.png"; sourceTree = "<group>"; };
+		5735E2A0201CB1A1002D0851 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "New Group/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		5735E2AD201CB72A002D0851 /* Слой 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Слой 10.png"; path = "../../../All Assets/Ready/Contents/Avatars/Слой 10.png"; sourceTree = "<group>"; };
+		5735E2AE201CB72B002D0851 /* Елизавета Орлова.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Елизавета Орлова.png"; path = "../../../All Assets/Ready/Contents/Avatars/Елизавета Орлова.png"; sourceTree = "<group>"; };
+		5735E2AF201CB72B002D0851 /* Анастасия Курдачева.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Анастасия Курдачева.png"; path = "../../../All Assets/Ready/Contents/Avatars/Анастасия Курдачева.png"; sourceTree = "<group>"; };
+		5735E2B0201CB72B002D0851 /* Мария Рафикова.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Мария Рафикова.png"; path = "../../../All Assets/Ready/Contents/Avatars/Мария Рафикова.png"; sourceTree = "<group>"; };
+		5735E2B1201CB72B002D0851 /* Анна Фатеева.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Анна Фатеева.png"; path = "../../../All Assets/Ready/Contents/Avatars/Анна Фатеева.png"; sourceTree = "<group>"; };
+		5735E2B2201CB72B002D0851 /* Слой 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Слой 12.png"; path = "../../../All Assets/Ready/Contents/Avatars/Слой 12.png"; sourceTree = "<group>"; };
+		5735E2B3201CB72C002D0851 /* Арина Бучарская.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Арина Бучарская.png"; path = "../../../All Assets/Ready/Contents/Avatars/Арина Бучарская.png"; sourceTree = "<group>"; };
+		5735E2B4201CB72C002D0851 /* Ангелина Акименко.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Ангелина Акименко.png"; path = "../../../All Assets/Ready/Contents/Avatars/Ангелина Акименко.png"; sourceTree = "<group>"; };
+		5735E2B5201CB72C002D0851 /* Слой 14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Слой 14.png"; path = "../../../All Assets/Ready/Contents/Avatars/Слой 14.png"; sourceTree = "<group>"; };
+		5735E2BF201CC065002D0851 /* body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = body.png; sourceTree = "<group>"; };
+		5735E2C0201CC065002D0851 /* boobs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boobs.png; sourceTree = "<group>"; };
+		5735E2C3201CFB97002D0851 /* addgirl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addgirl.png; sourceTree = "<group>"; };
+		5735E2C5201D01B0002D0851 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		5735E2C6201D01B0002D0851 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		5735E2C9201D080F002D0851 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Logo.png; path = "../../../All Assets/Ready/Contents/Logo.png"; sourceTree = "<group>"; };
+		5735E2CB201D109A002D0851 /* NavSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavSecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +94,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5735E28F201BC991002D0851 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,11 +117,11 @@
 		5735E23B201BC427002D0851 = {
 			isa = PBXGroup;
 			children = (
+				5735E2CB201D109A002D0851 /* NavSecondViewController.swift */,
 				5735E246201BC427002D0851 /* Compliment 2.0 */,
 				5735E25B201BC427002D0851 /* Compliment 2.0Tests */,
 				5735E266201BC427002D0851 /* Compliment 2.0UITests */,
 				5735E245201BC427002D0851 /* Products */,
-				5735E275201BC8AB002D0851 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,9 +138,28 @@
 		5735E246201BC427002D0851 /* Compliment 2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				5735E298201CA0A3002D0851 /* input.png */,
+				5735E296201C9EAC002D0851 /* next.png */,
+				5735E2C9201D080F002D0851 /* Logo.png */,
+				5735E2AF201CB72B002D0851 /* Анастасия Курдачева.png */,
+				5735E2B4201CB72C002D0851 /* Ангелина Акименко.png */,
+				5735E2B1201CB72B002D0851 /* Анна Фатеева.png */,
+				5735E2B3201CB72C002D0851 /* Арина Бучарская.png */,
+				5735E2C6201D01B0002D0851 /* delete.png */,
+				5735E2C5201D01B0002D0851 /* plus.png */,
+				5735E2BF201CC065002D0851 /* body.png */,
+				5735E2C0201CC065002D0851 /* boobs.png */,
+				5735E2C3201CFB97002D0851 /* addgirl.png */,
+				5735E2AE201CB72B002D0851 /* Елизавета Орлова.png */,
+				5735E2B0201CB72B002D0851 /* Мария Рафикова.png */,
+				5735E2AD201CB72A002D0851 /* Слой 10.png */,
+				5735E2B2201CB72B002D0851 /* Слой 12.png */,
+				5735E2B5201CB72C002D0851 /* Слой 14.png */,
+				5735E29A201CB122002D0851 /* VKEnter.png */,
+				5735E29F201CB1A1002D0851 /* Main.storyboard */,
 				5735E247201BC427002D0851 /* AppDelegate.swift */,
 				5735E249201BC427002D0851 /* ViewController.swift */,
-				5735E24B201BC427002D0851 /* Main.storyboard */,
+				5735E294201C9246002D0851 /* NavViewController.swift */,
 				5735E24E201BC427002D0851 /* Assets.xcassets */,
 				5735E250201BC427002D0851 /* LaunchScreen.storyboard */,
 				5735E253201BC427002D0851 /* Info.plist */,
@@ -176,28 +183,6 @@
 				5735E269201BC427002D0851 /* Info.plist */,
 			);
 			path = "Compliment 2.0UITests";
-			sourceTree = "<group>";
-		};
-		5735E275201BC8AB002D0851 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5735E277201BC8AC002D0851 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5735E282201BC8AC002D0851 /* Alamofire.framework */,
-				5735E284201BC8AC002D0851 /* Alamofire iOS Tests.xctest */,
-				5735E286201BC8AC002D0851 /* Alamofire.framework */,
-				5735E288201BC8AC002D0851 /* Alamofire macOS Tests.xctest */,
-				5735E28A201BC8AC002D0851 /* Alamofire.framework */,
-				5735E28C201BC8AC002D0851 /* Alamofire tvOS Tests.xctest */,
-				5735E28E201BC8AC002D0851 /* Alamofire.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,12 +278,6 @@
 			mainGroup = 5735E23B201BC427002D0851;
 			productRefGroup = 5735E245201BC427002D0851 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 5735E277201BC8AC002D0851 /* Products */;
-					ProjectRef = 5735E276201BC8AC002D0851 /* Alamofire.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				5735E243201BC427002D0851 /* Compliment 2.0 */,
@@ -308,66 +287,32 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		5735E282201BC8AC002D0851 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 5735E281201BC8AC002D0851 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5735E284201BC8AC002D0851 /* Alamofire iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire iOS Tests.xctest";
-			remoteRef = 5735E283201BC8AC002D0851 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5735E286201BC8AC002D0851 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 5735E285201BC8AC002D0851 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5735E288201BC8AC002D0851 /* Alamofire macOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire macOS Tests.xctest";
-			remoteRef = 5735E287201BC8AC002D0851 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5735E28A201BC8AC002D0851 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 5735E289201BC8AC002D0851 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5735E28C201BC8AC002D0851 /* Alamofire tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire tvOS Tests.xctest";
-			remoteRef = 5735E28B201BC8AC002D0851 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5735E28E201BC8AC002D0851 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 5735E28D201BC8AC002D0851 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		5735E242201BC427002D0851 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5735E2B6201CB72C002D0851 /* Слой 10.png in Resources */,
+				5735E2B8201CB72C002D0851 /* Анастасия Курдачева.png in Resources */,
+				5735E2A1201CB1A1002D0851 /* Main.storyboard in Resources */,
+				5735E2C1201CC066002D0851 /* body.png in Resources */,
 				5735E252201BC427002D0851 /* LaunchScreen.storyboard in Resources */,
+				5735E297201C9EAC002D0851 /* next.png in Resources */,
+				5735E299201CA0A4002D0851 /* input.png in Resources */,
+				5735E2BA201CB72C002D0851 /* Анна Фатеева.png in Resources */,
+				5735E2BD201CB72C002D0851 /* Ангелина Акименко.png in Resources */,
+				5735E2B9201CB72C002D0851 /* Мария Рафикова.png in Resources */,
+				5735E2C7201D01B1002D0851 /* plus.png in Resources */,
+				5735E2C2201CC066002D0851 /* boobs.png in Resources */,
+				5735E2B7201CB72C002D0851 /* Елизавета Орлова.png in Resources */,
+				5735E2BC201CB72C002D0851 /* Арина Бучарская.png in Resources */,
+				5735E2BE201CB72C002D0851 /* Слой 14.png in Resources */,
+				5735E2CA201D080F002D0851 /* Logo.png in Resources */,
 				5735E24F201BC427002D0851 /* Assets.xcassets in Resources */,
-				5735E24D201BC427002D0851 /* Main.storyboard in Resources */,
+				5735E2BB201CB72C002D0851 /* Слой 12.png in Resources */,
+				5735E2C8201D01B1002D0851 /* delete.png in Resources */,
+				5735E29B201CB123002D0851 /* VKEnter.png in Resources */,
+				5735E2C4201CFB97002D0851 /* addgirl.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +337,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5735E2CC201D109A002D0851 /* NavSecondViewController.swift in Sources */,
 				5735E24A201BC427002D0851 /* ViewController.swift in Sources */,
+				5735E295201C9246002D0851 /* NavViewController.swift in Sources */,
 				5735E248201BC427002D0851 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,20 +376,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5735E24B201BC427002D0851 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5735E24C201BC427002D0851 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5735E250201BC427002D0851 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5735E251201BC427002D0851 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5735E29F201CB1A1002D0851 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5735E2A0201CB1A1002D0851 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -558,6 +505,7 @@
 		5735E26D201BC427002D0851 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ESY9U785K8;
@@ -573,6 +521,7 @@
 		5735E26E201BC427002D0851 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ESY9U785K8;

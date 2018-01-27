@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import Alamofire
+//import Alamofire
 
 struct testStruct {
     static var name = ""
     static var access_token = ""
     static var user_id = ""
     static var returner = ""
+    static var girl_id = ""
 }
 
 class ViewController: UIViewController {
@@ -38,11 +39,11 @@ class ViewController: UIViewController {
     func returner() -> String{
         if(testStruct.returner == "New"){
             // New
-            let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "BoyQuestViewController") as! BoyQuestViewController
+            let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "NavViewController") as! NavViewController
             self.present(registerViewController, animated: true)
         }else{
             // Used
-            let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "NavSecondViewController") as! NavSecondViewController
             self.present(registerViewController, animated: true)
         }
         return testStruct.returner
@@ -131,7 +132,7 @@ class WebViewController: UIViewController,UIWebViewDelegate {
          }*/
         print("STRUCT = \(testStruct.access_token)")
         webView.delegate=self
-        let url=URL(string:"https://oauth.vk.com/authorize?client_id=5719989&display=mobile&redirect_uri=https://oauth.vk.com/blank.html&scope=messages,offline&response_type=token&v=5.63")
+        let url=URL(string:"https://oauth.vk.com/authorize?client_id=6349359&display=mobile&redirect_uri=https://oauth.vk.com/blank.html&scope=messages,offline&response_type=token&v=5.63")
         let urlRequest=URLRequest(url: url!)
         webView.loadRequest(urlRequest)
     }
@@ -162,49 +163,12 @@ class WebViewController: UIViewController,UIWebViewDelegate {
 
 class BoyQuestViewController: UIViewController {
     
-    @IBOutlet weak var quest1: UITextField!
-    @IBOutlet weak var quest2: UITextField!
-    @IBOutlet weak var quest3: UITextField!
-    @IBOutlet weak var quest4: UITextField!
-    @IBOutlet weak var quest5: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 23)!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
     }
-    @IBAction func send(_ sender: Any) {
-        if(quest1.text != "" && quest2.text != "" && quest3.text != "" && quest4.text != "" && quest5.text != ""){
-            let sessionConfig = URLSessionConfiguration.default
-            let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
-            let URL = NSURL(string: "http://localhost:3000/questboy?quest=\(String(quest1.text!))&quest=\(String(quest=2.text!))&quest=\(String(quest3.text!))&quest=\(String(quest4.text!))&quest=\(String(quest5.text!))&user_id=\(testStruct.user_id)")
-            var request = URLRequest(url: URL! as URL)
-            request.httpMethod = "GET"
-            /* Start a new Task */
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                    print("error=\(String(describing: error))")
-                    return
-                }
-                
-                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                    print("response = \(String(describing: response))")
-                }
-                let responseString = String(data: data, encoding: .utf8)
-                print("responseString = \(String(describing: responseString!))")
-                testStruct.returner = String(describing: responseString!)
-            }
-            task.resume()
-            session.finishTasksAndInvalidate()
-            let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChooseViewController") as! ChooseViewController
-            self.present(registerViewController, animated: true)
-        }else{
-            let alertController = UIAlertController(title: "Ошибка", message:
-                "Заполнены не все поля!", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Окей", style: UIAlertActionStyle.default,handler: nil))
-            
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
+    @IBOutlet var switches: [UISwitch]!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -216,8 +180,86 @@ class ChooseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 23)!]
+    }
+    @IBAction func girl1(_ sender: Any) {
+        let id = "185701089"
+        testStruct.girl_id = id
+        addGirl(girl_id: id,user_id: testStruct.user_id)
+        let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "NavSecondViewController") as! NavSecondViewController
+        self.present(registerViewController, animated: true)
+    }
+    /*@IBAction func girl2(_ sender: Any) {
+     var id = "2281337"
+     addGirl(girl_id: id,user_id: testStruct.user_id)
+     }
+     @IBAction func girl3(_ sender: Any) {
+     var id = "2281337"
+     addGirl(girl_id: id,user_id: testStruct.user_id)
+     }
+     @IBAction func girl4(_ sender: Any) {
+     var id = "2281337"
+     addGirl(girl_id: id,user_id: testStruct.user_id)
+     }
+     @IBAction func girl5(_ sender: Any) {
+     var id = "2281337"
+     addGirl(girl_id: id,user_id: testStruct.user_id)
+     }
+     @IBAction func girl6(_ sender: Any) {
+     var id = "2281337"
+     addGirl(girl_id: id,user_id: testStruct.user_id)
+     }
+     @IBAction func girl7(_ sender: Any) {
+     var id = "2281337"
+     addGirl(girl_id: id,user_id: testStruct.user_id)
+     }
+     @IBAction func girl8(_ sender: Any) {
+     var id = "2281337"
+     addGirl(girl_id: id,user_id: testStruct.user_id)
+     }
+     @IBAction func girl9(_ sender: Any) {
+     var id = "2281337"
+     addGirl(girl_id: id,user_id: testStruct.user_id)
+     }*/
+    func addGirl(girl_id: String, user_id: String){
+        //http://localhost:3000/girl_id?user_id=133087344&girl_id=153869259
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        let URL = NSURL(string: "http://127.0.0.1:3000/girl_id?user_id=\(user_id)&girl_id=\(girl_id)")
+        var request = URLRequest(url: URL as! URL)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString!))")
+        }
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+class BoobsViewController: UIViewController {
+    
+    @IBOutlet weak var boobs: UIImageView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
     }
+    @IBOutlet weak var image: UIImageView!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -225,12 +267,89 @@ class ChooseViewController: UIViewController {
     }
 }
 
-class MainViewController: UIViewController {
+class YourGirlsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 23)!]
+        startBot(user_id: testStruct.user_id)
     }
+    func startBot(user_id: String){
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        let URL = NSURL(string: "http://127.0.0.1:3000/send_message?user_id=\(user_id)")
+        var request = URLRequest(url: URL as! URL)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString!))")
+        }
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+
+class MainViewController: UIViewController {
+    
+    @IBOutlet weak var textFieldLinkOutlet: UITextField!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let URL_IMAGE = URL(string: "http://www.simplifiedtechy.net/wp-content/uploads/2017/07/simplified-techy-default.png")
+        let session = URLSession(configuration: .default)
+        
+        //creating a dataTask
+        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { (data, response, error) in
+            
+            //if there is any error
+            if let e = error {
+                //displaying the message
+                print("Error Occurred: \(e)")
+                
+            } else {
+                //in case of now error, checking wheather the response is nil or not
+                if (response as? HTTPURLResponse) != nil {
+                    
+                    //checking if the response contains an image
+                    if let imageData = data {
+                        
+                        //getting the image
+                        let image = UIImage(data: imageData)
+                        
+                        //displaying the image
+                        self.imageView?.image = image
+                        
+                    } else {
+                        print("Image file is currupted")
+                    }
+                } else {
+                    print("No response from server")
+                }
+            }
+        }
+        
+        //starting the download task
+        getImageFromUrl.resume()
+        //textFieldLinkOutlet.font: UIFont(name: "Helvetica", size: 20)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 23)!]
+    }
+    @IBOutlet weak var imageView: UIImageView!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
