@@ -253,7 +253,8 @@ function sendMessage(user_id,access_token,message){
         var sql = "SELECT user_id FROM boys WHERE access_token = '"+access_token+"'";
 	        con.query(sql, function (err, result) {
 	        if (err) throw err;
-	        setTimeout(compliment_chooser, 40000, result[0].user_id)
+	        var random_time = Math.floor(Math.random() * (120000 - 40000)) + 40000 // милисекунд
+	        setTimeout(compliment_chooser, random_time, result[0].user_id)
 	    })
     });
 }
