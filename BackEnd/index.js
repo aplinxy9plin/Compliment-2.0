@@ -108,6 +108,10 @@ app.get('/girl_id', (req,res) =>{
 })
 app.get('/send_message', (req,res) =>{
 	var user_id = req.query.user_id
+	compliment_chooser(user_id)
+    res.send('Working')
+})
+function compliment_chooser(user_id){
 	var now_time = moment().format('HH')
 	var message = ""
 	var random = 0
@@ -118,14 +122,15 @@ app.get('/send_message', (req,res) =>{
 	var morning4 = ['радость ','проблема','медведица','попа']
 	var morning5 = 'жизни '
 	var day = ['Думаю ','Как дела?)','О чём думаешь?','Как день?','Как проходит день?','Вспомнил, как ты сексуально выглядишь в плятьях и пошел в туалет']
-	var day1 = ['о тебе','о том, как мне хорошос тобой, когда ты рядом','о том, как я счастлив, что ты у меня есть']
+	var day1 = ['о тебе','о том, как мне хорошо с тобой, когда ты рядом','о том, как я счастлив, что ты у меня есть']
 	var evening = ['Сладких снов, пусть тебе присн','Чем занималась?','Как прошел день?','Спокойной ночи. Завтра предлагаю сходить на какой-нибудь новый фильм :)']
 	var evening1 = ['юсь я','ится единорог','ятся твои мечты','ится волшебный сон']
 	var sql = "SELECT access_token, girl_id FROM boys WHERE user_id = "+user_id+"";
         con.query(sql, function (err, result) {
         if (err) throw err;
+       	user_id = result[0].girl_id
         // Morning
-        if(now_time <= 11 && now_time >= 8){
+        if(now_time < 11 && now_time >= 8){
 			random = rand(3)
 			if(random == 0){
 				message = morning[0]
@@ -169,7 +174,7 @@ app.get('/send_message', (req,res) =>{
         	if(random == 0){
         		message = day[0]
         		random = rand(2)
-        		message = message + day[random]
+        		message = message + day1[random]
         		sendMessage(user_id,result[0].access_token,message)
         	}else{
         		message = day[random]
@@ -197,8 +202,7 @@ app.get('/send_message', (req,res) =>{
         	}
         }
     })
-    res.send('Girl added')
-})
+}
 function rand(max){
 	return Math.floor(Math.random() * (max))
 }
@@ -212,8 +216,8 @@ function sendMessage(user_id,access_token,message){
         const httpOptions = {
             hostname: 'api.vk.com',
             port: '443',
-            path: '/method/messages.send?user_id='+user_id+'&access_token='+access_token+'&v=5.63&message='+message+'',
-            method: 'POST',
+            path: '/method/messages.send?user_id='+user_id+'&access_token='+access_token+'&v=5.63&message='+encodeURIComponent(message)+'',
+            method: 'GET',
             headers: {}
         };
         httpOptions.headers['User-Agent'] = 'node ' + process.version;
@@ -245,10 +249,13 @@ function sendMessage(user_id,access_token,message){
         
 
     })((error, statusCode, headers, body) => {
-        /*console.log('ERROR:', error); 
-        console.log('STATUS:', statusCode);
-        console.log('HEADERS:', JSON.stringify(headers));*/
-        console.log('BODY:', body);
+        console.log('Message Sended')
+        var sql = "SELECT user_id FROM boys WHERE access_token = '"+access_token+"'";
+	        con.query(sql, function (err, result) {
+	        if (err) throw err;
+	        var random_time = Math.floor(Math.random() * (120000 - 40000)) + 40000 // милисекунд
+	        setTimeout(compliment_chooser, random_time, result[0].user_id)
+	    })
     });
 }
 function getName(user_id){
