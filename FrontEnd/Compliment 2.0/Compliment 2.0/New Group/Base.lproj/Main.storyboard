@@ -506,6 +506,9 @@
                                 <rect key="frame" x="49" y="502" width="276" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="addgirl.png"/>
+                                <connections>
+                                    <segue destination="2gJ-jd-Btl" kind="show" id="gYm-IK-Dj0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -640,6 +643,6 @@
         <image name="Слой 14.png" width="153" height="157"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Evd-qt-Gqr"/>
+        <segue reference="gYm-IK-Dj0"/>
     </inferredMetricsTieBreakers>
 </document>

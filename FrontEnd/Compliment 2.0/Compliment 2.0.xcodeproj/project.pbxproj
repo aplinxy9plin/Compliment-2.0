@@ -514,6 +514,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ESY9U785K8;
 				INFOPLIST_FILE = "Compliment 2.0/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nikita-aplin.Compliment-2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -530,6 +531,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ESY9U785K8;
 				INFOPLIST_FILE = "Compliment 2.0/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nikita-aplin.Compliment-2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
