@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5715E183201DF5700061C604 /* Анастасия Родькина.png in Resources */ = {isa = PBXBuildFile; fileRef = 5715E182201DF56F0061C604 /* Анастасия Родькина.png */; };
 		5735E248201BC427002D0851 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735E247201BC427002D0851 /* AppDelegate.swift */; };
 		5735E24A201BC427002D0851 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735E249201BC427002D0851 /* ViewController.swift */; };
 		5735E24F201BC427002D0851 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5735E24E201BC427002D0851 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5715E182201DF56F0061C604 /* Анастасия Родькина.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Анастасия Родькина.png"; sourceTree = "<group>"; };
 		5735E244201BC427002D0851 /* Compliment 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Compliment 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5735E247201BC427002D0851 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5735E249201BC427002D0851 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				5735E2B3201CB72C002D0851 /* Арина Бучарская.png */,
 				5735E2C6201D01B0002D0851 /* delete.png */,
 				5735E2C5201D01B0002D0851 /* plus.png */,
+				5715E182201DF56F0061C604 /* Анастасия Родькина.png */,
 				5735E2BF201CC065002D0851 /* body.png */,
 				5735E2C0201CC065002D0851 /* boobs.png */,
 				5735E2C3201CFB97002D0851 /* addgirl.png */,
@@ -292,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5715E183201DF5700061C604 /* Анастасия Родькина.png in Resources */,
 				5735E2B6201CB72C002D0851 /* Слой 10.png in Resources */,
 				5735E2B8201CB72C002D0851 /* Анастасия Курдачева.png in Resources */,
 				5735E2A1201CB1A1002D0851 /* Main.storyboard in Resources */,

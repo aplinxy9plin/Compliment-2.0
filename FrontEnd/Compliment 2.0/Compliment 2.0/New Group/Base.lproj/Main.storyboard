@@ -201,17 +201,16 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fz-3e-FQW">
                                 <rect key="frame" x="137" y="108" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="Елизавета Орлова.png"/>
+                                <state key="normal" title="Button" image="Анастасия Родькина.png"/>
                                 <connections>
                                     <action selector="girl2:" destination="2gJ-jd-Btl" eventType="touchUpInside" id="Fkl-Uc-69d"/>
-                                    <action selector="girl:" destination="2gJ-jd-Btl" eventType="touchUpInside" id="B00-08-GSh"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RcX-PC-b77">
                                 <rect key="frame" x="145" y="208" width="83" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Елизавета Орлова">
+                                    <fragment content="Анастасия Родькина">
                                         <attributes>
                                             <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
@@ -383,6 +382,21 @@
             </objects>
             <point key="canvasLocation" x="1888.8" y="372.86356821589209"/>
         </scene>
+        <!--Test View Controller-->
+        <scene sceneID="JJa-Kd-Oxq">
+            <objects>
+                <viewController id="4D5-TL-3t8" customClass="TestViewController" customModule="Compliment_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rdn-KM-fma">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="CqZ-Sf-bxm"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="70m-U7-eYX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-300" y="288.30584707646182"/>
+        </scene>
         <!--Nav View Controller-->
         <scene sceneID="sHS-Ah-2Xr">
             <objects>
@@ -511,6 +525,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udx-kK-8w9">
+                                <rect key="frame" x="299" y="41" width="52" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="delete.png"/>
+                            </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="Анастасия Курдачева.png" translatesAutoresizingMaskIntoConstraints="NO" id="UMA-uE-as9">
                                 <rect key="frame" x="16" y="20" width="96" height="91"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -528,15 +547,6 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udx-kK-8w9">
-                                <rect key="frame" x="299" y="41" width="52" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="delete.png"/>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="plus.png" translatesAutoresizingMaskIntoConstraints="NO" id="zyu-yu-pjo">
-                                <rect key="frame" x="-185" y="156" width="498" height="447"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dF-RF-zap">
                                 <rect key="frame" x="0.0" y="0.0" width="291" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -544,11 +554,26 @@
                                     <segue destination="A2J-ln-Srf" kind="show" id="UcR-6x-hoo"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5f-lB-h99">
+                                <rect key="frame" x="251" y="497" width="81" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.34509803919999998" green="0.5450980392" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2gJ-jd-Btl" kind="show" id="Evd-qt-Gqr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1IT-Tw-IAz"/>
                     </view>
                     <navigationItem key="navigationItem" title="Ваши девушки" id="t9D-Rh-3uR"/>
+                    <connections>
+                        <outlet property="plusButton" destination="L5f-lB-h99" id="Sqb-bK-XHO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OEJ-yz-GG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -598,21 +623,23 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo.png" width="511" height="456"/>
+        <image name="Logo.png" width="512" height="512"/>
         <image name="VKEnter.png" width="524" height="99"/>
         <image name="addgirl.png" width="337" height="53"/>
         <image name="delete.png" width="48" height="48"/>
         <image name="input.png" width="559" height="101"/>
         <image name="next.png" width="337" height="53"/>
-        <image name="plus.png" width="619" height="434"/>
         <image name="Анастасия Курдачева.png" width="157" height="157"/>
+        <image name="Анастасия Родькина.png" width="85" height="85"/>
         <image name="Ангелина Акименко.png" width="157" height="157"/>
         <image name="Анна Фатеева.png" width="157" height="157"/>
         <image name="Арина Бучарская.png" width="157" height="157"/>
-        <image name="Елизавета Орлова.png" width="157" height="157"/>
         <image name="Мария Рафикова.png" width="153" height="157"/>
         <image name="Слой 10.png" width="157" height="153"/>
         <image name="Слой 12.png" width="157" height="157"/>
         <image name="Слой 14.png" width="153" height="157"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Evd-qt-Gqr"/>
+    </inferredMetricsTieBreakers>
 </document>
