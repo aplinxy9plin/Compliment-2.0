@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 //import Alamofire
 
 struct testStruct {
@@ -24,6 +25,7 @@ struct testStruct {
     static var number1 = 0
     static var button = [UIButton]()
     static var label = [UILabel]()
+    static var friend_list = ["Tomoto", "Rice", "Bread", "Milk", "Cheese"]
 }
 
 class ViewController: UIViewController {
@@ -74,7 +76,7 @@ class ViewController: UIViewController {
          Request (POST http://13.95.174.54/server/test.php)
          */
         
-        let URL = NSURL(string: "http://46.236.128.17:3000/reg?access_token=\(access_token)&user_id=\(user_id)")
+        let URL = NSURL(string: "http://192.168.0.102:3000/reg?access_token=\(access_token)&user_id=\(user_id)")
         var request = URLRequest(url: URL as! URL)
         request.httpMethod = "GET"
         /* Start a new Task */
@@ -98,7 +100,7 @@ class ViewController: UIViewController {
     func getName(user_id: String){
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
-        let URL = NSURL(string: "http://46.236.128.17:3000/get_name?user_id=\(user_id)")
+        let URL = NSURL(string: "http://192.168.0.102:3000/get_name?user_id=\(user_id)")
         var request = URLRequest(url: URL as! URL)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -176,6 +178,7 @@ class BoyQuestViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 23)!]
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        //sendRequest()
     }
     @IBOutlet var switches: [UISwitch]!
     
@@ -187,6 +190,45 @@ class BoyQuestViewController: UIViewController {
 
 class ChooseViewController: UIViewController {
     
+    @IBOutlet weak var link_input: UITextField!
+    @IBAction func save_girl(_ sender: Any) {
+        let id = link_input.text
+        testStruct.girl_id[0] = id!
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        let URL = NSURL(string: "https://api.vk.com/api.php?oauth=1&method=users.get&user_id=\(id)&v=5.74")
+        var request = URLRequest(url: URL as! URL)
+        var name = ""
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            //print("responseString = \(String(describing: responseString!))")
+            print("qq")
+            var test = String(describing: responseString!)
+            
+            let json = JSON(data)
+            testStruct.girl_name[0] = json["response"][0]["first_name"].string! + " " + json["response"][0]["last_name"].string!
+            print(testStruct.girl_name[0])
+            //name = json["response"]["items"][0]["first_name"].string + " " + json["response"]["items"][0]["last_name"].string
+        }
+        //self.viewDidLoad()
+        task.resume()
+        session.finishTasksAndInvalidate()
+        //testStruct.girl_name[0] = "Анастасия Курдачева"
+        addGirl(girl_id: id!,user_id: testStruct.user_id)
+        let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "NavSecondViewController") as! NavSecondViewController
+        self.present(registerViewController, animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
@@ -243,7 +285,7 @@ class ChooseViewController: UIViewController {
         //http://localhost:3000/girl_id?user_id=133087344&girl_id=153869259
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
-        let URL = NSURL(string: "http://46.236.128.17:3000/girl_id?user_id=\(user_id)&girl_id=\(girl_id)")
+        let URL = NSURL(string: "http://192.168.0.102:3000/girl_id?user_id=\(user_id)&girl_id=\(girl_id)")
         var request = URLRequest(url: URL as! URL)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -271,7 +313,7 @@ class ChooseViewController: UIViewController {
         //http://localhost:3000/girl_id?user_id=133087344&girl_id=153869259
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
-        let URL = NSURL(string: "http://46.236.128.17:3000/girl_id1?user_id=\(user_id)&girl_id=\(girl_id)")
+        let URL = NSURL(string: "http://192.168.0.102:3000/girl_id1?user_id=\(user_id)&girl_id=\(girl_id)")
         var request = URLRequest(url: URL as! URL)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -292,83 +334,197 @@ class ChooseViewController: UIViewController {
         session.finishTasksAndInvalidate()
     }
 }
+struct AnimeJsonStuff: Decodable {
+    let data: [AnimeDataArray]
+}
 
-class TestViewController: UIViewController {
-    var arrayImageLink = ["https://pp.userapi.com/c841137/v841137846/37d98/iL2IvM3znFw.jpg","https://pp.userapi.com/c841028/v841028970/64210/kQz2tKZ3plE.jpg"]
-    var arrayName = ["Никита Усольцев","Дарья Ренжигло"]
-    var myImage = UIImageView()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("loadedefsadfasfas")
-        myImage.layer.cornerRadius = 50
-        myImage.clipsToBounds = true
-        while(testStruct.number <= 1){
-            testStruct.friendName = arrayName[testStruct.number]
-            collect(url: arrayImageLink[testStruct.number])
-            testStruct.xCor += 100
-            testStruct.number += 1
-        }
-        //testStruct.friendName = arrayName[0]
-        //collect(url: arrayImageLink[testStruct.number])
+struct AnimeLinks: Codable {
+    var selfStr   : String?
+    
+    private enum CodingKeys : String, CodingKey {
+        case selfStr     = "self"
     }
-    func viewButton(){
-        //print(testStruct.label[testStruct.number].text)
-        view.addSubview(testStruct.button[testStruct.number])
-        view.addSubview(testStruct.label[testStruct.number])
+}
+struct AnimeAttributes: Codable {
+    var createdAt   : String?
+    
+    private enum CodingKeys : String, CodingKey {
+        case createdAt     = "createdAt"
     }
-    func collect(url: String){
-        if let url = URL(string: url) {
-            myImage.contentMode = .scaleAspectFit
-            downloadImage(url: url)
-        }
-        print("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
-    }
-    @objc func buttonAction(sender: UIButton!) {
-        collect(url: arrayImageLink[0])
-    }
-    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            completion(data, response, error)
-            }.resume()
-    }
-    func downloadImage(url: URL) {
-        print("Download Started")
-        getDataFromUrl(url: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
-            DispatchQueue.main.async() {
-                self.myImage.image = UIImage(data: data)
-                // var button   = UIButton.buttonWithType(UIButtonType.System) as UIButton
-                var button = UIButton()
-                button.frame = CGRect(x: testStruct.xCor, y: testStruct.yCor, width: 100, height: 100)
-                button.setImage(self.myImage.image, for: .normal)
-                button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
-                testStruct.button.append(button)
-                //self.view.addSubview(button)
-                var label: UILabel = UILabel()
-                label.frame = CGRect(x: testStruct.xCor, y: (testStruct.yCor + 110), width: 110, height: 50)
-                label.textColor = UIColor.black
-                label.textAlignment = NSTextAlignment.center
-                label.text = testStruct.friendName
-                label.numberOfLines = 0
-                testStruct.label.append(label)
-                //self.view.addSubview(label)
-            }
-            self.viewButton()
-        }
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+struct AnimeRelationships: Codable {
+    var links   : AnimeRelationshipsLinks?
+    
+    private enum CodingKeys : String, CodingKey {
+        case links     = "links"
     }
 }
 
+struct AnimeRelationshipsLinks: Codable {
+    var selfStr   : String?
+    var related   : String?
+    
+    private enum CodingKeys : String, CodingKey {
+        case selfStr     = "self"
+        case related     = "related"
+    }
+}
+
+struct AnimeDataArray: Codable {
+    let id: String?
+    let type: String?
+    let links: AnimeLinks?
+    let attributes: AnimeAttributes?
+    let relationships: [String: AnimeRelationships]?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case type = "type"
+        case links = "links"
+        case attributes = "attributes"
+        case relationships = "relationships"
+    }
+}
+class TestViewController: UITableViewController {
+        var foods = testStruct.friend_list
+        
+        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+        {
+            return foods.count
+        }
+        
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = foods[indexPath.row]
+            return cell
+        }
+        
+        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+        {
+            if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark
+            {
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+            }
+            else
+            {
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+            }
+        }
+        
+        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+        {
+            if editingStyle == UITableViewCellEditingStyle.delete
+            {
+                foods.remove(at: indexPath.row)
+                tableView.reloadData()
+            }
+        }
+        
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            print(testStruct.friend_list)
+            // Do any additional setup after loading the view, typically from a nib.
+        }
+        
+        override func didReceiveMemoryWarning() {
+            super.didReceiveMemoryWarning()
+            // Dispose of any resources that can be recreated.
+        }
+    
+}
+protocol URLQueryParameterStringConvertible {
+    var queryParameters: String {get}
+}
+
+extension Dictionary : URLQueryParameterStringConvertible {
+    /**
+     This computed property returns a query parameters string from the given NSDictionary. For
+     example, if the input is @{@"day":@"Tuesday", @"month":@"January"}, the output
+     string will be @"day=Tuesday&month=January".
+     @return The computed parameters string.
+     */
+    var queryParameters: String {
+        var parts: [String] = []
+        for (key, value) in self {
+            let part = String(format: "%@=%@",
+                              String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
+                              String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+            parts.append(part as String)
+        }
+        return parts.joined(separator: "&")
+    }
+    
+}
+
+extension URL {
+    /**
+     Creates a new URL by adding the given query parameters.
+     @param parametersDictionary The query parameter dictionary to add.
+     @return A new URL.
+     */
+    func appendingQueryParameters(_ parametersDictionary : Dictionary<String, String>) -> URL {
+        let URLString : String = String(format: "%@?%@", self.absoluteString, parametersDictionary.queryParameters)
+        return URL(string: URLString)!
+    }
+}
 class YourGirlsViewController: UIViewController {
     
     @IBOutlet weak var plusButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //messages.getHistory
+        
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        let URL = NSURL(string: "https://api.vk.com/method/messages.getHistory?user_id=151534106&v=5.74&count=5&access_token=\(testStruct.access_token)")
+        var request = URLRequest(url: URL as! URL)
+        var name = ""
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            //print("responseString = \(String(describing: responseString!))")
+            print("qq")
+            var test = String(describing: responseString!)
+            var p = 0
+            let json = JSON(data)
+            while(p < 5){
+                //print(json["response"]["items"][0]["body"])
+                var message = json["response"]["items"][p]["body"]
+                if(json["response"]["items"][p]["out"] == 1){
+                    print("out 1")
+                    print("Бот: \(message)")
+                    /*let label: UILabel = UILabel()
+                    label.frame = CGRect(x: 72, y: 216, width: 236, height: 21)
+                    label.textColor = UIColor.black
+                    label.textAlignment = NSTextAlignment.center
+                    label.text = "Анастасия Курдачева"
+                    label.numberOfLines = 0
+                    self.view.addSubview(label)*/
+                }else{
+                    print("\(testStruct.girl_name[0]): \(message)")
+                }
+                p += 1
+            }
+            //json["response"][0]["first_name"].string! + " " + json["response"][0]["last_name"].string!
+            //print(json)
+            //name = json["response"]["items"][0]["first_name"].string + " " + json["response"]["items"][0]["last_name"].string
+        }
+        //self.viewDidLoad()
+        task.resume()
+        session.finishTasksAndInvalidate()
+        
         plusButton.layer.cornerRadius = 50
         plusButton.clipsToBounds = true
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
@@ -417,26 +573,7 @@ class YourGirlsViewController: UIViewController {
             buttonGo.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
             view.addSubview(buttonGo)*/
             
-            //Родькина
-            let imageView1 = UIImageView()
-            imageView1.frame = CGRect(x: 16, y: 145, width: 96, height: 91)
-            imageView1.image = #imageLiteral(resourceName: "Анастасия Родькина.png")
-            view.addSubview(imageView1)
-            let label1: UILabel = UILabel()
-            label1.frame = CGRect(x: 120, y: 161, width: 135, height: 58)
-            label1.textColor = UIColor.black
-            label1.text = "Анастасия Родькина"
-            label1.font = UIFont(name: "Helvetica", size: 23)
-            label1.numberOfLines = 0
-            view.addSubview(label1)
-            let button1 = UIButton()
-            button1.frame = CGRect(x: 299, y: 166, width: 52, height: 48)
-            button1.setImage(#imageLiteral(resourceName: "delete.png"), for: UIControlState.normal)
-            view.addSubview(button1)
-            let buttonGo11 = UIButton()
-            buttonGo11.frame = CGRect(x: 0, y: 125, width: 291, height: 111)
-            buttonGo11.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
-            view.addSubview(buttonGo11)
+           
         }
     }
     @objc func buttonAction(){
@@ -446,7 +583,7 @@ class YourGirlsViewController: UIViewController {
     func startBot(user_id: String){
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
-        let URL = NSURL(string: "http://46.236.128.17:3000/send_message?user_id=\(user_id)")
+        let URL = NSURL(string: "http://192.168.0.102:3000/send_message?user_id=\(user_id)")
         var request = URLRequest(url: URL as! URL)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in

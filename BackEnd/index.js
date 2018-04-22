@@ -7,8 +7,8 @@ var mysql = require('mysql')
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "crazyfrog",
+  user: "top4ek",
+  password: "q2w3e4r5",
   database: "compliment"
 });
 
@@ -31,11 +31,6 @@ app.use((request, response, next) => {
 app.get('/', (request, response) => {
   //console.log(request.json)
 })
-
-app.get('/test', (request, response) => {
-  response.send(request.query.quest)
-})
-
 app.get('/reg', (req,res) =>{
 	var token = req.query.access_token
 	var user_id = req.query.user_id
@@ -45,7 +40,7 @@ app.get('/reg', (req,res) =>{
 	      var sql = "INSERT INTO boys (access_token, user_id) VALUES ('"+token+"', '"+user_id+"')";
 	      con.query(sql, function (err, result) {
 	        if (err) throw err;
-	        getName(user_id)
+	        //getName(user_id)
 	        console.log("User recorded to database");
 	        res.send('New')
 	      });
@@ -125,7 +120,7 @@ function compliment_chooser(user_id){
         if (err) throw err;
        	user_id = result[0].girl_id
         // Morning
-        if(now_time < 11 && now_time >= 0){
+	    if(now_time < 11 && now_time >= 5){
 			random = rand(3)
 			if(random == 0){
 				message = morning[0]
@@ -161,7 +156,7 @@ function compliment_chooser(user_id){
 			}else{
 				message = morning[random]
 				sendMessage(user_id,result[0].access_token,message)
-			} 	
+			}
         }
         // Day
         if(now_time >= 11 && now_time <= 19){
@@ -177,7 +172,7 @@ function compliment_chooser(user_id){
         	}
         }
         // Evening
-        if((now_time > 19 && now_time < 23) || now_time == 0){
+	    if((now_time > 19 && now_time < 23) || (now_time >= 0 && now_time < 5)){
         	random = rand(3)
         	switch (random) {
 			  case 0:
@@ -189,11 +184,11 @@ function compliment_chooser(user_id){
 			  case 3:
 			  	// Бот отправляет сообщение о киношке
 				message = evening[3]
-        		sendMessage(user_id,result[0].access_token,message)			
+        		sendMessage(user_id,result[0].access_token,message)
 			    break;
 			  default:
 				message = evening[random]
-        		sendMessage(user_id,result[0].access_token,message)			
+        		sendMessage(user_id,result[0].access_token,message)
         	}
         }
     })
@@ -213,12 +208,12 @@ function compliment_chooser1(user_id){
 	var evening = ['Сладких снов, пусть тебе присн','Чем занималась?','Как прошел день?','Спокойной ночи. Завтра предлагаю сходить на какой-нибудь новый фильм :)']
 	var evening1 = ['юсь я','ится единорог','ятся твои мечты','ится волшебный сон']
 	var sql = "SELECT access_token, girl_id1 FROM boys WHERE user_id = "+user_id+"";
-        con.query(sql, function (err, result) {
+        con.query(sql, function (err, res) {
         if (err) throw err;
-       	user_id = result[0].girl_id
-       	if(user_id == ""){
+       	user_id = res[0].girl_id1
+       	if(user_id !== ""){
 	        // Morning
-	        if(now_time < 11 && now_time >= 0){
+	        if(now_time < 11 && now_time >= 5){
 				random = rand(3)
 				if(random == 0){
 					message = morning[0]
@@ -234,27 +229,27 @@ function compliment_chooser1(user_id){
 								random = rand(3)
 								if(random == 0){
 									message = message + morning4[0] + morning5
-									sendMessage(user_id,result[0].access_token,message)
+									sendMessage(user_id,res[0].access_token,message)
 								}else{
 									message = message + morning4[random]
-									sendMessage(user_id,result[0].access_token,message)
+									sendMessage(user_id,res[0].access_token,message)
 								}
 							}else{
 								message = message + morning3[random]
-								sendMessage(user_id,result[0].access_token,message)
+								sendMessage(user_id,res[0].access_token,message)
 							}
 						}else{
 							message = message + morning2[random]
-							sendMessage(user_id,result[0].access_token,message)
+							sendMessage(user_id,res[0].access_token,message)
 						}
 					}else{
 						message = message + morning1[random]
-						sendMessage(user_id,result[0].access_token,message)
+						sendMessage(user_id,res[0].access_token,message)
 					}
 				}else{
 					message = morning[random]
-					sendMessage(user_id,result[0].access_token,message)
-				} 	
+					sendMessage(user_id,res[0].access_token,message)
+				}
 	        }
 	        // Day
 	        if(now_time >= 11 && now_time <= 19){
@@ -263,30 +258,30 @@ function compliment_chooser1(user_id){
 	        		message = day[0]
 	        		random = rand(2)
 	        		message = message + day1[random]
-	        		sendMessage(user_id,result[0].access_token,message)
+	        		sendMessage(user_id,res[0].access_token,message)
 	        	}else{
 	        		message = day[random]
-	        		sendMessage(user_id,result[0].access_token,message)
+	        		sendMessage(user_id,res[0].access_token,message)
 	        	}
 	        }
 	        // Evening
-	        if((now_time > 19 && now_time < 23) || now_time == 0){
+	        if((now_time > 19 && now_time < 23) || (now_time >= 0 && now_time < 5)){
 	        	random = rand(3)
 	        	switch (random) {
 				  case 0:
 				  	message = evening[0]
 				    random = rand(3)
 				    message = message + evening1[random]
-	        		sendMessage(user_id,result[0].access_token,message)
+	        		sendMessage(user_id,res[0].access_token,message)
 				    break;
 				  case 3:
 				  	// Бот отправляет сообщение о киношке
 					message = evening[3]
-	        		sendMessage(user_id,result[0].access_token,message)			
+	        		sendMessage(user_id,res[0].access_token,message)
 				    break;
 				  default:
 					message = evening[random]
-	        		sendMessage(user_id,result[0].access_token,message)			
+	        		sendMessage(user_id,res[0].access_token,message)
 	        	}
 	        }
     	}
@@ -299,7 +294,7 @@ function rand(max){
 function sendMessage(user_id,access_token,message){
     (function(callback) {
         'use strict';
-            
+
         const httpTransport = require('https');
         const responseEncoding = 'utf8';
         const httpOptions = {
@@ -313,21 +308,21 @@ function sendMessage(user_id,access_token,message){
         const request = httpTransport.request(httpOptions, (res) => {
             let responseBufs = [];
             let responseStr = '';
-            
+
             res.on('data', (chunk) => {
                 if (Buffer.isBuffer(chunk)) {
                     responseBufs.push(chunk);
                 }
                 else {
-                    responseStr = responseStr + chunk;            
+                    responseStr = responseStr + chunk;
                 }
             }).on('end', () => {
-                responseStr = responseBufs.length > 0 ? 
+                responseStr = responseBufs.length > 0 ?
                     Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
-                
+
                 callback(null, res.statusCode, res.headers, responseStr);
             });
-            
+
         })
         .setTimeout(0)
         .on('error', (error) => {
@@ -335,7 +330,7 @@ function sendMessage(user_id,access_token,message){
         });
         request.write("")
         request.end();
-        
+
 
     })((error, statusCode, headers, body) => {
         console.log('Message Sended')
@@ -350,7 +345,7 @@ function sendMessage(user_id,access_token,message){
 function sendMessageBot(user_id,access_token,message){
     (function(callback) {
         'use strict';
-            
+
         const httpTransport = require('https');
         const responseEncoding = 'utf8';
         const httpOptions = {
@@ -364,21 +359,21 @@ function sendMessageBot(user_id,access_token,message){
         const request = httpTransport.request(httpOptions, (res) => {
             let responseBufs = [];
             let responseStr = '';
-            
+
             res.on('data', (chunk) => {
                 if (Buffer.isBuffer(chunk)) {
                     responseBufs.push(chunk);
                 }
                 else {
-                    responseStr = responseStr + chunk;            
+                    responseStr = responseStr + chunk;
                 }
             }).on('end', () => {
-                responseStr = responseBufs.length > 0 ? 
+                responseStr = responseBufs.length > 0 ?
                     Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
-                
+
                 callback(null, res.statusCode, res.headers, responseStr);
             });
-            
+
         })
         .setTimeout(0)
         .on('error', (error) => {
@@ -386,7 +381,7 @@ function sendMessageBot(user_id,access_token,message){
         });
         request.write("")
         request.end();
-        
+
 
     })((error, statusCode, headers, body) => {
         console.log('Message Sended by BOT')
@@ -395,7 +390,7 @@ function sendMessageBot(user_id,access_token,message){
 function getName(user_id){
     (function(callback) {
         'use strict';
-            
+
         const httpTransport = require('https');
         const responseEncoding = 'utf8';
         const httpOptions = {
@@ -409,21 +404,21 @@ function getName(user_id){
         const request = httpTransport.request(httpOptions, (res) => {
             let responseBufs = [];
             let responseStr = '';
-            
+
             res.on('data', (chunk) => {
                 if (Buffer.isBuffer(chunk)) {
                     responseBufs.push(chunk);
                 }
                 else {
-                    responseStr = responseStr + chunk;            
+                    responseStr = responseStr + chunk;
                 }
             }).on('end', () => {
-                responseStr = responseBufs.length > 0 ? 
+                responseStr = responseBufs.length > 0 ?
                     Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
-                
+
                 callback(null, res.statusCode, res.headers, responseStr);
             });
-            
+
         })
         .setTimeout(0)
         .on('error', (error) => {
@@ -431,7 +426,7 @@ function getName(user_id){
         });
         request.write("")
         request.end();
-        
+
 
     })((error, statusCode, headers, body) => {
         var test = JSON.parse(body)
@@ -440,11 +435,12 @@ function getName(user_id){
             if (err) throw err;
             console.log('Name Added')
         })
-    });   
+    });
 }
 app.listen(3000, function (){
 	console.log('Compliment 2.0 backend started');
 })
+// если у пользователя уже есть одна+ девушка - кидаем на "ваши девушки"
 //http://localhost:3000/questboy?quest=123&quest=321&quest=321&quest=321&quest=321&user_id=133087344
 //http://localhost:3000/girl_id?user_id=133087344&girl_id=153869259
 //http://localhost:3000/reg?access_token=2281337&user_id=133087344
